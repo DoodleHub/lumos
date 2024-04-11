@@ -12,7 +12,7 @@ import routerBindings, {
 import { App as AntdApp } from 'antd';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { dataProvider, liveProvider } from './providers';
+import { authProvider, dataProvider, liveProvider } from './providers';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
               liveProvider={liveProvider}
               notificationProvider={useNotificationProvider}
               routerProvider={routerBindings}
-              // authProvider={}
+              authProvider={authProvider}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
