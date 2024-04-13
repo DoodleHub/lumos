@@ -3,10 +3,11 @@ import { SettingOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useGetIdentity } from '@refinedev/core';
 
-import CustomAvatar from './custom-avatar';
+import CustomAvatar from '../custom-avatar';
 import { Text } from '../text';
 
 import type { User } from '@/graphql/schema.types';
+import { AccountSettings } from './account-settings';
 
 const CurrentUser = () => {
   const { data: user } = useGetIdentity<User>();
@@ -55,6 +56,13 @@ const CurrentUser = () => {
           style={{ cursor: 'pointer' }}
         />
       </Popover>
+      {user && (
+        <AccountSettings
+          opened={isOpen}
+          setOpened={setIsOpen}
+          userId={user.id}
+        />
+      )}
     </>
   );
 };
