@@ -1,4 +1,4 @@
-import { DealsChart, UpcomingEvents } from '@/components/home';
+import { DealsChart, UpcomingEvents } from '@/components';
 import { Col, Row } from 'antd';
 
 export const Home = () => {
