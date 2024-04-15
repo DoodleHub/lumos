@@ -11,8 +11,6 @@ import {
 } from '@ant-design/icons';
 import { Button, Card, Input, Select, Space, Table } from 'antd';
 
-import { Contact } from '@/graphql/schema.types';
-
 import { statusOptions } from '@/constants';
 import { COMPANY_CONTACTS_TABLE_QUERY } from '@/graphql/queries';
 
@@ -129,10 +127,10 @@ export const CompanyContactsTable = () => {
           showSizeChanger: false, // hide the page size changer
         }}
       >
-        <Table.Column<Contact>
+        <Table.Column
           title="Name"
           dataIndex="name"
-          render={(_, record) => (
+          render={(_, record: any) => (
             <Space>
               <CustomAvatar name={record.name} src={record.avatarUrl} />
               <Text
@@ -163,11 +161,13 @@ export const CompanyContactsTable = () => {
             </FilterDropdown>
           )}
         />
-        <Table.Column<Contact>
+        <Table.Column
           title="Stage"
           dataIndex="status"
           // render the status tag for each contact
-          render={(_, record) => <ContactStatusTag status={record.status} />}
+          render={(_, record: any) => (
+            <ContactStatusTag status={record.status} />
+          )}
           // allow filtering by selecting multiple status options
           filterDropdown={(props) => (
             <FilterDropdown {...props}>
@@ -180,10 +180,10 @@ export const CompanyContactsTable = () => {
             </FilterDropdown>
           )}
         />
-        <Table.Column<Contact>
+        <Table.Column
           dataIndex="id"
           width={112}
-          render={(_, record) => (
+          render={(_, record: any) => (
             <Space>
               <Button
                 size="small"

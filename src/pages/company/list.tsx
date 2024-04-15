@@ -1,7 +1,6 @@
 import CustomAvatar from '@/components/custom-avatar';
 import { Text } from '@/components/text';
 import { COMPANIES_LIST_QUERY } from '@/graphql/queries';
-import { Company } from '@/graphql/schema.types';
 import { CompaniesListQuery } from '@/graphql/types';
 import { currencyNumber } from '@/utils';
 import { SearchOutlined } from '@ant-design/icons';
@@ -86,7 +85,7 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
             ...tableProps.pagination,
           }}
         >
-          <Table.Column<Company>
+          <Table.Column
             dataIndex="name"
             title="Company Title"
             defaultFilteredValue={getDefaultFilter('id', filters)}
@@ -96,7 +95,7 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
                 <Input placeholder="Search Company" />
               </FilterDropdown>
             )}
-            render={(value, record) => (
+            render={(_, record: any) => (
               <Space>
                 <CustomAvatar
                   shape="square"
@@ -107,16 +106,16 @@ export const CompanyList = ({ children }: React.PropsWithChildren) => {
               </Space>
             )}
           />
-          <Table.Column<Company>
+          <Table.Column
             dataIndex="totalRevenue"
             title="Open deals amount"
-            render={(value, company) => (
+            render={(_, company: any) => (
               <Text>
                 {currencyNumber(company?.dealsAggregate?.[0].sum?.value || 0)}
               </Text>
             )}
           />
-          <Table.Column<Company>
+          <Table.Column
             dataIndex="id"
             title="Actions"
             fixed="right"
