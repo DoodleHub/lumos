@@ -6,14 +6,15 @@ import CustomAvatar from '@/components/custom-avatar';
 import { getNameInitials } from '@/utils';
 import { USERS_SELECT_QUERY } from '@/graphql/queries';
 import SelectOptionWithAvatar from '@/components/select-option-with-avatar';
-
-import { type GetFieldsFromList } from '@refinedev/nestjs-query';
-import { type UsersSelectQuery } from '@/graphql/types';
 import {
   businessTypeOptions,
   companySizeOptions,
   industryOptions,
 } from '@/constants';
+import { CompanyContactsTable } from './contacts-table';
+
+import { type GetFieldsFromList } from '@refinedev/nestjs-query';
+import { type UsersSelectQuery } from '@/graphql/types';
 
 const EditPage = () => {
   const { saveButtonProps, formProps, formLoading, queryResult } = useForm({
@@ -23,7 +24,7 @@ const EditPage = () => {
     },
   });
 
-  const { avatarurl, name } = queryResult?.data?.data || {};
+  const { avatarUrl, name } = queryResult?.data?.data || {};
 
   const { selectProps, queryResult: queryResultUsers } = useSelect<
     GetFieldsFromList<UsersSelectQuery>
@@ -41,7 +42,7 @@ const EditPage = () => {
   return (
     <div>
       <Row gutter={[32, 32]}>
-        <Col xs={24} xl={32}>
+        <Col xs={24} xl={12}>
           <Edit
             isLoading={formLoading}
             saveButtonProps={saveButtonProps}
@@ -50,7 +51,7 @@ const EditPage = () => {
             <Form {...formProps} layout="vertical">
               <CustomAvatar
                 shape="square"
-                src={avatarurl}
+                src={avatarUrl}
                 name={getNameInitials(name || '')}
                 style={{ width: 96, height: 96, marginBottom: '24px' }}
               />
@@ -100,6 +101,9 @@ const EditPage = () => {
               </Form.Item>
             </Form>
           </Edit>
+        </Col>
+        <Col xs={24} xl={12}>
+          <CompanyContactsTable />
         </Col>
       </Row>
     </div>
