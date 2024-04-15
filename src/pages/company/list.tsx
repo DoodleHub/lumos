@@ -1,3 +1,9 @@
+import CustomAvatar from '@/components/custom-avatar';
+import { Text } from '@/components/text';
+import { COMPANIES_LIST_QUERY } from '@/graphql/queries';
+import { Company } from '@/graphql/schema.types';
+import { CompaniesListQuery } from '@/graphql/types';
+import { currencyNumber } from '@/utilities';
 import { SearchOutlined } from '@ant-design/icons';
 import {
   CreateButton,
@@ -10,14 +16,6 @@ import {
 import { HttpError, getDefaultFilter, useGo } from '@refinedev/core';
 import { GetFieldsFromList } from '@refinedev/nestjs-query';
 import { Input, Space, Table } from 'antd';
-
-import CustomAvatar from '@/components/custom-avatar';
-import { Text } from '@/components/text';
-import { COMPANIES_LIST_QUERY } from '@/graphql/queries';
-import { currencyNumber } from '@/utils';
-
-import { type Company } from '@/graphql/schema.types';
-import { type CompaniesListQuery } from '@/graphql/types';
 
 export const CompanyList = ({ children }: React.PropsWithChildren) => {
   const go = useGo();
